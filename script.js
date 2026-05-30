@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000); 
     }
 
-    // 🎵 ৫. মিউজিক ফোর্স প্লে করার ফাংশন (ব্রাউজার সিকিউরিটি বাইপাস)
+    // 🎵 ৫. মিউজিক প্লে করার শক্তিশালী ফাংশন (মোবাইল ও পিসির জন্য)
     function initMusicController() {
         const music = document.getElementById('bg-music');
         if (!music) return;
@@ -63,16 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (music.paused) {
                 music.play()
                     .then(() => {
-                        console.log("Music started successfully!");
-                        // একবার গান চালু হয়ে গেলে এই ইভেন্ট লিসেনারগুলো রিমুভ করে দেওয়া হবে
+                        console.log("Music playing successfully!");
+                        // একবার গান চালু হয়ে গেলে ক্লিক ইভেন্টগুলো বন্ধ করে দেওয়া হবে
                         document.removeEventListener('click', playAudio);
                         document.removeEventListener('touchstart', playAudio);
                     })
-                    .catch(error => console.log("Playback failed, waiting for user interaction:", error));
+                    .catch(error => console.log("Waiting for user input to play audio...", error));
             }
         };
 
-        // ইউজার পিসিতে ক্লিক করলে বা মোবাইলে টাচ করলেই গান বাজবে
+        // ব্রাউজার পলিসি অনুযায়ী প্রথম টাচ বা ক্লিকেই মিউজিক ট্রিগার হবে
         document.addEventListener('click', playAudio);
         document.addEventListener('touchstart', playAudio);
     }
