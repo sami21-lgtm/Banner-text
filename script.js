@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.slide');
     let autoSlideTimer;
 
-    // ১. টেক্সট ভেঙে আলাদা অক্ষরে রূপান্তর এবং Delay সেট করার ফাংশন
+    // ১. টেক্সট অ্যানিমেশন সেটআপ
     function prepareAnimatedTexts() {
         slides.forEach(slide => {
             const nameElement = slide.querySelector('.image-name');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ২. data-image থেকে ব্যাকগ্রাউন্ড ইমেজ সেট করার ফাংশন
+    // ২. ব্যাকগ্রাউন্ড ইমেজ লোড করা
     function setBackgroundImages() {
         slides.forEach(slide => {
             const container = slide.querySelector('.image-container');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ৩. স্লাইড পরিবর্তনের মূল ফাংশন
+    // ৩. স্লাইড পরিবর্তন
     function changeSlide() {
         if(slides.length === 0) return;
         slides[currentSlideIndex].classList.remove('active');
@@ -47,37 +47,41 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[currentSlideIndex].classList.add('active');
     }
 
-    // ⏱️ ৪. অটো-প্লে টাইমার (প্রতি ৪ সেকেন্ড পর পর ছবি বদলাবে)
+    // ৪. অটো-প্লে টাইমার (৪ সেকেন্ড)
     function startAutoSlide() {
         autoSlideTimer = setInterval(() => {
             changeSlide(); 
         }, 4000); 
     }
 
-    // 🎵 ৫. মিউজিক প্লে করার শক্তিশালী ফাংশন (মোবাইল ও পিসির জন্য)
+    // 🎵 ৫. গান বাজানোর আল্টিমেট ট্রিক (ক্লিক বা টাচ ডিটেকশন)
     function initMusicController() {
         const music = document.getElementById('bg-music');
-        if (!music) return;
+        if (!music) {
+            console.error("Audio element with ID 'bg-music' not found in HTML!");
+            return;
+        }
 
         const playAudio = () => {
-            if (music.paused) {
-                music.play()
-                    .then(() => {
-                        console.log("Music playing successfully!");
-                        // একবার গান চালু হয়ে গেলে ক্লিক ইভেন্টগুলো বন্ধ করে দেওয়া হবে
-                        document.removeEventListener('click', playAudio);
-                        document.removeEventListener('touchstart', playAudio);
-                    })
-                    .catch(error => console.log("Waiting for user input to play audio...", error));
-            }
+            // ব্রাউজারকে ফোর্স করা হচ্ছে গানটি প্লে করার জন্য
+            music.play()
+                .then(() => {
+                    console.log("SUCCESS: Music is now playing!");
+                    // গান সফলভাবে চালু হলে ইভেন্ট রিমুভ হবে যেন বারবার ফায়ার না হয়
+                    document.removeEventListener('click', playAudio);
+                    document.removeEventListener('touchstart', playAudio);
+                })
+                .catch(error => {
+                    console.error("ERROR: Browser blocked music or file not found:", error);
+                });
         };
 
-        // ব্রাউজার পলিসি অনুযায়ী প্রথম টাচ বা ক্লিকেই মিউজিক ট্রিগার হবে
+        // মোবাইল বা পিসিতে যেকোনো একটি টাচ বা ক্লিক পেলেই গান বাজবে
         document.addEventListener('click', playAudio);
         document.addEventListener('touchstart', playAudio);
     }
 
-    // সব ফাংশন চালু করা
+    // রান করা হলো
     prepareAnimatedTexts();
     setBackgroundImages();
     initMusicController();
