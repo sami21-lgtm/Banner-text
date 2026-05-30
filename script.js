@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         slides.forEach(slide => {
             const nameElement = slide.querySelector('.image-name');
             if (nameElement) {
-                const originalText = nameElement.innerText.trim();
+                // সরাসরি HTML এর ভেতরের লেখাটি পড়া হচ্ছে
+                const originalText = nameElement.textContent.trim();
                 nameElement.innerHTML = ''; // আগের টেক্সট ক্লিয়ার করা
                 
                 // প্রতিটা অক্ষরকে আলাদা Span এ নেওয়া হচ্ছে
@@ -62,6 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[0].classList.add('active');
     }
 
-    // HTML-এর onclick="changeSlide()" এর সাথে কানেক্ট করার জন্য গ্লোবাল স্কোপে দেওয়া হলো
+    // HTML-এর জন্য গ্লোবাল স্কোপে দেওয়া হলো
     window.changeSlide = changeSlide;
 });
