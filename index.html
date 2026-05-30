@@ -11,50 +11,51 @@
     <div class="banner-text">
       <h2>Banner Text <span class="hover-effect">Hover Effect</span></h2>
     </div>
+    
     <div class="slides">
-    <div class="slide active">
-        <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_46_01 PM.png"></div>
-        <h1 class="image-name animated">DESERT</h1>
-    </div>
-    <div class="slide">
-        <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_47_03 PM.png"></div>
-        <h1 class="image-name animated">FOREST</h1>
-    </div>
-    <div class="slide">
-        <div class="image-container" data-image="3e533be0-ecfd-4d90-af7d-c0a4fb7f8fc1.png"></div>
-        <h1 class="image-name animated">CANYON</h1>
-    </div>
-    <div class="slide">
-        <div class="image-container" data-image=ChatGPT Image May 30, 2026, 07_52_05 PM.png"></div>
-        <h1 class="image-name animated">GLACIER</h1>
-    </div>
-    <div class="slide">
-        <div class="image-container" data-image=ChatGPT Image May 30, 2026, 07_52_45 PM.png"></div>
-        <h1 class="image-name animated">OCEAN</h1>
-    </div>
-    <div class="slide">
-        <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_54_05 PM.png"></div>
-        <h1 class="image-name animated">FALLS</h1>
-    </div>
-</div>
-
-        <div class="controls">
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        <div class="slide active">
+            <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_46_01 PM.png"></div>
+            <h1 class="image-name animated">DESERT</h1>
+        </div>
+        <div class="slide">
+            <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_47_03 PM.png"></div>
+            <h1 class="image-name animated">FOREST</h1>
+        </div>
+        <div class="slide">
+            <div class="image-container" data-image="3e533be0-ecfd-4d90-af7d-c0a4fb7f8fc1.png"></div>
+            <h1 class="image-name animated">CANYON</h1>
+        </div>
+        <div class="slide">
+            <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_52_05 PM.png"></div>
+            <h1 class="image-name animated">GLACIER</h1>
+        </div>
+        <div class="slide">
+            <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_52_45 PM.png"></div>
+            <h1 class="image-name animated">OCEAN</h1>
+        </div>
+        <div class="slide">
+            <div class="image-container" data-image="ChatGPT Image May 30, 2026, 07_54_05 PM.png"></div>
+            <h1 class="image-name animated">FALLS</h1>
         </div>
     </div>
 
-    <audio id="bg-music" src="jboy-remix_aya-nakamura-copines-jboyremix-iwg-_ (1).mp3" loop></audio>
+    <div class="controls">
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <audio id="bg-music" src="jboy-remix_aya-nakamura-copines-jboyremix-iwg-_ (1).mp3" loop></audio>
 
-    <script>
-      document.addEventListener('click', function() {
-        const music = document.getElementById('bg-music');
-        if (music && music.paused) {
-          music.play().catch(error => console.log("Audio play blocked: ", error));
-        }
-      }, { once: true }); // once: true মানে এই ক্লিক ইভেন্টটি শুধু প্রথম ক্লিকের সময়ই কাজ করবে
-    </script>
+  <script src="script.js"></script>
+
+  <script>
+    document.addEventListener('click', function() {
+      const music = document.getElementById('bg-music');
+      if (music && music.paused) {
+        music.play().catch(error => console.log("Audio play blocked: ", error));
+      }
+    }, { once: true });
+  </script>
 </body>
 </html>
