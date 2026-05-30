@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ৩. স্লাইড পরিবর্তনের মূল ফাংশন
     function changeSlide() {
+        if(slides.length === 0) return;
         slides[currentSlideIndex].classList.remove('active');
         currentSlideIndex++;
         
@@ -53,14 +54,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000); 
     }
 
+    // 🎵 ৫. মিউজিক ফোর্স প্লে করার ফাংশন (ব্রাউজার সিকিউরিটি বাইপাস)
+    function initMusicController() {
+        const music = document.getElementById('bg-music');
+        if (!music) return;
+
+        const playAudio = () => {
+            if (music.paused) {
+                music.play()
+                    .then(() => {
+                        console.log("Music started successfully!");
+                        // একবার গান চালু হয়ে গেলে এই ইভেন্ট লিসেনারগুলো রিমুভ করে দেওয়া হবে
+                        document.removeEventListener('click', playAudio);
+                        document.removeEventListener('touchstart', playAudio);
+                    })
+                    .catch(error => console.log("Playback failed, waiting for user interaction:", error));
+            }
+        };
+
+        // ইউজার পিসিতে ক্লিক করলে বা মোবাইলে টাচ করলেই গান বাজবে
+        document.addEventListener('click', playAudio);
+        document.addEventListener('touchstart', playAudio);
+    }
+
     // সব ফাংশন চালু করা
     prepareAnimatedTexts();
     setBackgroundImages();
+    initMusicController();
     
     if (slides.length > 0) {
         slides[0].classList.add('active');
     }
 
-    // স্লাইডার চালু হওয়ার সাথে সাথে অটো-প্লে শুরু হবে
     startAutoSlide();
 });
