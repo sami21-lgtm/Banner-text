@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentSlideIndex = 0;
     const slides = document.querySelectorAll('.slide');
-    let autoSlideTimer; // টাইমারটি রাখার জন্য ভেরিয়েবল
+    let autoSlideTimer;
 
-    // ১. লেখা ভেঙে আলাদা করার ফাংশন
+    // ১. টেক্সট ভেঙে আলাদা অক্ষরে রূপান্তর এবং Delay সেট করার ফাংশন
     function prepareAnimatedTexts() {
         slides.forEach(slide => {
             const nameElement = slide.querySelector('.image-name');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ২. ইমেজ ব্যাকগ্রাউন্ড লোড করা
+    // ২. data-image থেকে ব্যাকগ্রাউন্ড ইমেজ সেট করার ফাংশন
     function setBackgroundImages() {
         slides.forEach(slide => {
             const container = slide.querySelector('.image-container');
@@ -34,37 +34,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ৩. স্লাইড বদলানোর মেইন ফাংশন
-    function changeSlide(n) {
+    // ৩. স্লাইড পরিবর্তনের মূল ফাংশন
+    function changeSlide() {
         slides[currentSlideIndex].classList.remove('active');
-        currentSlideIndex += n;
+        currentSlideIndex++;
         
         if (currentSlideIndex >= slides.length) {
             currentSlideIndex = 0;
-        } else if (currentSlideIndex < 0) {
-            currentSlideIndex = slides.length - 1;
         }
 
         slides[currentSlideIndex].classList.add('active');
-        
-        // ইউজার যখন ম্যানুয়ালি বাটনে ক্লিক করবে, তখন অটো-প্লে টাইমারটি রিস্টার্ট হবে
-        resetAutoSlide();
     }
 
-    // ⏱️ ৪. অটো-প্লে টাইমার ফাংশন (প্রতি ৪ সেকেন্ড পর পর ছবি বদলাবে)
+    // ⏱️ ৪. অটো-প্লে টাইমার (প্রতি ৪ সেকেন্ড পর পর ছবি বদলাবে)
     function startAutoSlide() {
         autoSlideTimer = setInterval(() => {
-            changeSlide(1); // ১ মানে সামনের স্লাইডে যাবে
-        }, 4000); // ৪০০০ মিলিডিসেকেন্ড = ৪ সেকেন্ড (আপনি চাইলে সময় বাড়াতে বা কমাতে পারেন)
+            changeSlide(); 
+        }, 4000); 
     }
 
-    // ৫. টাইমার রিস্টার্ট করার ফাংশন
-    function resetAutoSlide() {
-        clearInterval(autoSlideTimer); // আগের টাইমার বন্ধ করবে
-        startAutoSlide(); // নতুন করে ৪ সেকেন্ড গোনা শুরু করবে
-    }
-
-    // প্রজেক্ট রান করা
+    // সব ফাংশন চালু করা
     prepareAnimatedTexts();
     setBackgroundImages();
     
@@ -74,6 +63,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // স্লাইডার চালু হওয়ার সাথে সাথে অটো-প্লে শুরু হবে
     startAutoSlide();
-
-    window.changeSlide = changeSlide;
 });
