@@ -1,4 +1,3 @@
-/* ১. ইউনিভার্সাল রিসেট */
 * {
     margin: 0;
     padding: 0;
@@ -6,21 +5,20 @@
 }
 
 body {
-    background-color: #0c1122; /* ছবির ডার্ক থিমের সাথে ম্যাচিং */
+    background-color: #0c1122; 
     color: white;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden; /* মোবাইলে স্ক্রিন যেন ডানে-বামে না নড়ে */
+    overflow-x: hidden; 
 }
 
-/* ২. মেইন স্লাইডার কন্টেইনার */
 .slider-container {
     position: relative;
     width: 100%;
-    max-width: 1100px; /* ল্যাপটপ বা পিসির জন্য পারফেক্ট চওড়া সাইজ */
+    max-width: 1100px; 
     height: 90vh;
     padding: 20px;
     display: flex;
@@ -29,7 +27,6 @@ body {
     justify-content: center;
 }
 
-/* ৩. ওপরে থাকা ব্যানার টেক্সট */
 .banner-text {
     text-align: center;
     margin-bottom: 25px;
@@ -42,7 +39,7 @@ body {
 }
 
 .banner-text .hover-effect {
-    color: #4be3ff; /* ছবির গ্লোয়িং কালার */
+    color: #4be3ff; 
     transition: color 0.3s ease;
 }
 
@@ -51,11 +48,9 @@ body {
     text-shadow: 0 0 10px #4be3ff, 0 0 20px #4be3ff;
 }
 
-/* ৪. মেইন স্লাইড বক্স (সাদা বর্ডার) */
 .slides {
     position: relative;
     width: 100%;
-    /* 🖥️ পিসি এবং ল্যাপটপের জন্য স্ট্যান্ডার্ড ১৬:৯ সিনেমাটিক রেশিও */
     aspect-ratio: 16 / 9; 
     border: 4px solid #ffffff;
     box-shadow: 0 15px 35px rgba(0,0,0,0.6);
@@ -77,33 +72,30 @@ body {
     visibility: visible;
 }
 
-/* ৫. 🖼️ ইমেজ কন্টেইনার (ছবি না ফাটার মূল ট্রিক) */
 .image-container {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-size: cover; /* ছবিকে স্ট্রেচ বা চ্যাপ্টা না করে পুরো বক্সে ফিট করবে */
-    background-position: center center; /* ছবির মূল অংশ সবসময় মাঝখানে রাখবে */
+    background-size: cover; 
+    background-position: center center; 
     background-repeat: no-repeat;
-    image-rendering: -webkit-optimize-contrast; /* ব্রাউজারে ছবিকে শার্প ও ক্লিয়ার রাখবে */
+    image-rendering: -webkit-optimize-contrast; 
     image-rendering: crisp-edges;
     transform: scale(1);
     transition: transform 5s ease-out;
 }
 
-/* স্লাইড একটিভ হলে ছবি ফেটে না গিয়ে খুব স্মুথলি জুম হবে */
 .slide.active .image-container {
     transform: scale(1.06);
 }
 
-/* ৬. মাঝখানের আঁকাবাঁকা টেক্সট (Serif Font) */
 .image-name {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: 'Times New Roman', Times, serif;
-    font-size: 4rem; /* পিসি ও ল্যাপটপের জন্য বড় গর্জিয়াস সাইজ */
+    font-size: 4rem; 
     font-weight: 400;
     display: flex;
     justify-content: center;
@@ -115,12 +107,11 @@ body {
 .image-name span {
     display: inline-block;
     opacity: 0;
-    margin: 0 12px; /* অক্ষরের মাঝের গ্যাপ */
+    margin: 0 12px; 
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* ছবির মতো ঢেউ খেলানোর জন্য পজিশন */
 .image-name span:nth-child(even) {
     transform: translateY(45px) rotate(6deg) scale(0.8);
 }
@@ -129,7 +120,6 @@ body {
     transform: translateY(-25px) rotate(-6deg) scale(0.8);
 }
 
-/* একটিভ স্লাইডের টেক্সট অ্যানিমেশন */
 .slide.active .image-name span {
     opacity: 1;
 }
@@ -142,57 +132,23 @@ body {
     transform: translateY(-10px) rotate(-4deg) scale(1);
 }
 
-/* ৭. কন্ট্রোল বাটন (Prev/Next) */
-.controls {
-    margin-top: 25px;
-    display: flex;
-    gap: 20px;
-}
-
-.controls button {
-    background: transparent;
-    color: white;
-    border: 1px solid #ffffff;
-    padding: 10px 25px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.controls button:hover {
-    background: white;
-    color: #0c1122;
-}
-
-/* =======================================================
-   📱 ৮. রেসপন্সিভ মিডিয়া কোয়েরি (মোবাইল ও ট্যাবলেটের জন্য)
-   ======================================================= */
+/* 📱 মোবাইল স্ক্রিনের জন্য বিশেষ অপ্টিমাইজেশন */
 @media (max-width: 768px) {
     .slider-container {
         padding: 10px;
         height: auto;
     }
-
-    .banner-text {
-        margin-bottom: 15px;
-    }
-
     .banner-text h2 {
-        font-size: 1.8rem; /* মোবাইলে ওপরের লেখা মানানসই ছোট হবে */
+        font-size: 1.8rem; 
     }
-
-    /* 📱 মোবাইলে ছবি যেন চ্যাপ্টা বা ফেটে না যায়, সেজন্য পারফেক্ট স্কয়ার/ভার্টিক্যাল রেশিও */
     .slides {
         aspect-ratio: 4 / 3; 
         border-width: 3px;
     }
-
-    /* মোবাইলের স্ক্রিনে নামগুলো যেন সুন্দরভাবে ফিট হয় */
     .image-name {
-        font-size: 2.2rem; /* অক্ষরের সাইজ মোবাইলের জন্য পারফেক্ট করা হলো */
+        font-size: 2.2rem; 
     }
-
     .image-name span {
-        margin: 0 5px !important; /* মোবাইলে অক্ষরের মাঝের ফাঁকা জায়গা কমানো হলো */
+        margin: 0 5px !important; 
     }
 }
