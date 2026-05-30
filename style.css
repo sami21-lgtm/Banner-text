@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0c1122;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.slider-container {
+    position: relative;
+    width: 85%;
+    max-width: 800px;
+    height: 80vh;
+    background-color: #0c1122;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.banner-text {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.banner-text h2 {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.banner-text .hover-effect {
+    color: #4be3ff;
+}
+
+.banner-text p {
+    display: inline-block;
+    color: #b085f5;
+    border: 1px solid #b085f5;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    border: 2px solid #fff;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1);
+    transition: transform 4s ease-out;
+}
+
+/* ছবি হালকা জুম হওয়ার অ্যানিমেশন */
+.slide.active .image-container {
+    transform: scale(1.08);
+}
+
+/* মাঝখানের লেখার স্টাইল (ছবিগুলোর মতো Serif ফন্ট) */
+.image-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    pointer-events: none;
+}
+
+/* প্রতিটি আলাদা অক্ষরের জন্য স্টাইল */
+.image-name span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    margin: 0 12px; /* অক্ষরের মাঝের দূরত্ব */
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* স্লাইড একটিভ হলে অক্ষরগুলো অ্যানিমেটেড হয়ে আসবে */
+.slide.active .image-name span {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ছবির মতো ঢেউ খেলানো বা আঁকাবাঁকা করার জন্য জোড়-বিজোড় অক্ষরের পজিশন পরিবর্তন */
+.wave-text span:nth-child(even) {
+    transform: translateY(40px) rotate(5deg); /* ছবির মতো একটু নিচে ও বাঁকা থাকবে */
+}
+.wave-text span:nth-child(odd) {
+    transform: translateY(20px) rotate(-5deg); /* ছবির মতো একটু ওপরে ও উল্টো বাঁকা থাকবে */
+}
+
+/* একটিভ হলে জোড়-বিজোড় অক্ষরগুলো তাদের নির্দিষ্ট ঢেউ খেলানো জায়গায় গিয়ে দাঁড়াবে */
+.slide.active .wave-text span:nth-child(even) {
+    transform: translateY(15px) rotate(6deg); 
+}
+.slide.active .wave-text span:nth-child(odd) {
+    transform: translateY(-10px) rotate(-4deg);
+}
+
+.controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.controls button {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+}
